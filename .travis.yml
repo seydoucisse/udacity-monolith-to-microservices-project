@@ -16,5 +16,5 @@ script:
   - docker tag reverseproxy cisseseydou/reverseproxy:v1
 
 after_success: 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
   - docker-compose -f docker-compose-build.yml push
