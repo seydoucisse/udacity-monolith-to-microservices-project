@@ -10,15 +10,15 @@ before_script:
 
 script: 
   - docker-compose -f docker-compose-build.yml build --parallel
-  - docker tag udagram-api-feed cisseseydou/udagram-api-feed:v1
-  - docker tag udagram-api-user cisseseydou/udagram-api-user:v1
-  - docker tag udagram-frontend cisseseydou/udagram-frontend:v1
-  - docker tag reverseproxy cisseseydou/reverseproxy:v1
+  - docker tag udagram-api-feed cisseseydou/udagram-api-feed
+  - docker tag udagram-api-user cisseseydou/udagram-api-user
+  - docker tag udagram-frontend cisseseydou/udagram-frontend
+  - docker tag reverseproxy cisseseydou/reverseproxy
 
 after_success: 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push cisseseydou/udagram-api-feed:v1
-  - docker push cisseseydou/udagram-api-user:v1
-  - docker push cisseseydou/udagram-frontend:v1
-  - docker push cisseseydou/reverseproxy:v1
+  - docker push cisseseydou/udagram-api-feed
+  - docker push cisseseydou/udagram-api-user
+  - docker push cisseseydou/udagram-frontend
+  - docker push cisseseydou/reverseproxy
   
