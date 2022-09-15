@@ -16,7 +16,7 @@ script:
   - docker tag udagram-reverseproxy cisseseydou/udagram-reverseproxy:v1
 
 after_success: 
-  - echo "$DOCKER_PASSWORD". | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push cisseseydou/udagram-api-feed:v1
   - docker push cisseseydou/udagram-api-user:v1
   - docker push cisseseydou/udagram-frontend:v1
