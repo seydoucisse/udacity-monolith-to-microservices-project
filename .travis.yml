@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - 16
+
+services:
+  - docker
+
+before_script: 
+  - echo "Nothing to do"
+
+script: 
+  - docker compose -f docker-compose-build.yml build --parallel
+  - docker tag udagram-api-feed cisseseydou/udagram-api-feed:v1
+  - docker tag udagram-api-user cisseseydou/udagram-api-user:v1
+  - docker tag udagram-frontend cisseseydou/udagram-frontend:v1
+  - docker tag udagram-reverseproxy cisseseydou/udagram-reverseproxy:v1
+
+after_success: 
+  - echo "$DOCKER_PASSWORD". | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push cisseseydou/udagram-api-feed:v1
+  - docker push cisseseydou/udagram-api-user:v1
+  - docker push cisseseydou/udagram-frontend:v1
+  - docker push cisseseydou/udagram-api-feed:v1
