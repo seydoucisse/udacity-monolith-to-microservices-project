@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-user
+spec:
+  selector:
+    matchLabels:
+      app: backend-user
+  template:
+    metadata:
+      labels:
+        app: backend-user
+    spec:
+      containers:
+      - name: backend-user
+        image: cisseseydou/udagram-api-user
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: env-secret
+          - configMapRef:
+              name: env-configmap
+      restartPolicy: Always
